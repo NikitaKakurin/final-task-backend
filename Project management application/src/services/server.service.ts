@@ -24,11 +24,7 @@ export const socket = new Server(server, {
   },
 });
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(cors());
 app.use(mung);
 app.use(isAuth);
 app.use("/users", usersRouter);
