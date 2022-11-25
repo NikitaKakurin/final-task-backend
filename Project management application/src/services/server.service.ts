@@ -20,11 +20,24 @@ export const app = express();
 export const server = http.createServer(app);
 export const socket = new Server(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "*",
+      "http://localhost:3000",
+      "https://nikitakakurin-task-schelduler.netlify.app",
+    ],
   },
 });
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "*",
+      "http://localhost:3000",
+      "https://nikitakakurin-task-schelduler.netlify.app",
+    ],
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
+  })
+);
 app.use(mung);
 app.use(isAuth);
 app.use("/users", usersRouter);
